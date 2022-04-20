@@ -15,9 +15,9 @@ class Principal:
 
         self.frame1 = Frame(self.window, width=175, height=600, borderwidth=2, relief="solid")  # Barra Lateral
         self.frame2 = Frame(self.window, width=725, height=50, borderwidth=0, relief="solid")   # Nome do cinema
-        self.frame3 = Frame(self.window, width=725, height=100, borderwidth=1, relief="solid")  # abaixo do nome
+        self.frame3 = Frame(self.window, width=725, height=100, borderwidth=1, relief="solid")  # Banner 1
         self.frame4 = Frame(self.window, width=725, height=350, borderwidth=2, relief="solid")  # Filmes em cartaz
-        self.frame5 = Frame(self.window, width=725, height=100, borderwidth=1, relief="solid")  # Retirar ingresso
+        self.frame5 = Frame(self.window, width=725, height=100, borderwidth=1, relief="solid")  # Banner 2
 
         self.frame1.pack(side=LEFT)
         self.frame2.pack()
