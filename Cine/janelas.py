@@ -1,11 +1,10 @@
-import tkinter
 from tkinter import *
+import LoginScreen
 
 # Logo: 170x40
 # Filmes em cartaz: 170x300
 # Botões laterais: 175x105
 # Ambos os banners: 725x100
-
 
 class Principal:
     def __init__(self):
@@ -52,7 +51,7 @@ class Principal:
         self.btn_carrinho = Button(self.frame1, image=self.imag3)
         self.btn_carrinho.grid()
 
-        self.btn_adm = Button(self.frame1, image=self.imag3)
+        self.btn_adm = Button(self.frame1, image=self.imag3, command=lambda: LoginScreen.LoginScreen(self.window))
         self.btn_adm.grid()
 
         # Frame 2
@@ -82,6 +81,7 @@ class Principal:
         # Frame 5
         self.logo = Label(self.frame5, text="teste5")
         self.logo.grid()
+
 
     def run(self):
         self.window.mainloop()
