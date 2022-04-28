@@ -1,5 +1,5 @@
 from tkinter import *
-import LoginScreen
+import loginGui
 
 # Logo: 170x40
 # Filmes em cartaz: 170x300
@@ -51,7 +51,7 @@ class Principal:
         self.btn_carrinho = Button(self.frame1, image=self.imag3)
         self.btn_carrinho.grid()
 
-        self.btn_adm = Button(self.frame1, image=self.imag3, command=lambda: LoginScreen.LoginScreen(self.window))
+        self.btn_adm = Button(self.frame1, image=self.imag3, command=lambda: loginGui.LoginScreen(self.window))
         self.btn_adm.grid()
 
         # Frame 2
