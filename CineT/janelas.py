@@ -281,11 +281,14 @@ class Filme(funcDb):
                                   command=self.btn_confirma)
             btn_confirma.grid(ipadx=110)
             self.newWindow.grab_set()
-        def btn_confirma(self):
-            print(self.dados)
-            for i in range(len(self.dados)):
-                if self.dados[i] == 2:
-                    self.altera_status_poltrona(i + 1, 1)
+         def btn_confirma(self):
+            if(2 in self.dados):
+                for i in range(len(self.dados)):
+                    if self.dados[i] == 2:
+                        self.altera_status_poltrona(i + 1, 1)
+                        #prx tela
+            else:
+                messagebox.showinfo(title="Poltrona invalida", message="Selecione uma poltrona vazia")
 
 
         def atualiza_dados_db(self):
