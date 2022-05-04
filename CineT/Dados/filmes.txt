@@ -1,0 +1,14 @@
+nome: Batman
+genero: Acao
+classificacao = 16
+duracao = 105min
+.
+nome: Carros
+genero: Animacao
+classificacao = 12
+duracao = 120min
+.
+nome: Tubarao
+genero: Terror
+classificacao = 18
+duracao = 100min
