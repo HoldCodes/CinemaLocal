@@ -183,7 +183,6 @@ class Store:
             self.Product_Sub_List.current(0)
 
     def cat2(self, e=' '):
-
         if (self.Product_Rate_txt['state'] == 'disabled'):
             self.Product_Rate_txt.config(state='normal')
         self.Product_Rate_txt.delete(0, 'end')
@@ -197,15 +196,11 @@ class Store:
         elif self.Product_Sub_List.get() == "INGRESSO 2D - Meia":
             self.Product_Rate_txt.insert(END, (self.carrinho.get_valor_unitario() * 1.2 / 2))
         self.Product_Rate_txt.config(state='disabled')
+        self.addItem()
+
 
     def addItem(self):
-        if self.Product_Cat_List.get() == "Selecione categoria":
-            messagebox.showinfo("info", "selecione uma categoria")
-        elif self.price.get() == 0 or self.price.get() == "":
-            messagebox.showinfo("info", "informe o preço do produto")
-        elif self.qty.get() == 0 or self.qty.get() == "":
-            messagebox.showinfo("info", "informe a quantidade do produto")
-        else:
+        if self.Product_Cat_List.get() != "Selecione categoria" and self.qty.get() != 0 and self.qty.get() != "" and self.price.get() != 0 and self.price.get() != "":
             r = float(self.price.get())
             q = self.qty.get()
             t = r * q
@@ -218,7 +213,7 @@ class Store:
         # if len(self.cname.get())==0 and len(self.cmob.get())==0 and len(self.cbill.get())==0:
         #    messagebox.showinfo("info","Informe os dados do cliente")
         if self.Product_Cat_List.get() == "Selecione categoria":
-            messagebox.showinfo("info", "Selecione uma categoria")
+            messagebox.showinfo("info", "Nenhum produto selecionado!")
         elif self.price.get() == 0 or self.price.get() == "":
             messagebox.showinfo("info", "Informe o preço do produto")
         elif self.qty.get() == 0 or self.qty.get() == "":
@@ -228,8 +223,14 @@ class Store:
             total = sum(self.tlist)
             self.billarea.insert(3.16, self.cname.get())
             self.billarea.insert(4.16, self.cmob.get())
-            self.billarea.insert(END, "\\n-----------------------------------------------------------------------")
+            self.billarea.insert(END, "\n-----------------------------------------------------------------------")
             self.billarea.insert(END, f'\n Total={space * 63} {total}')
+            q = self.billarea.get(1.0, 'end-1c')
+            filename = tempfile.mktemp('.txt')
+            open(filename, 'w').write(q)
+            os.startfile(filename, "print")
+            janelas.Filme.btn_confirma(self.principalobj)
+            self.quit()
 
     def save_bill(self):
         opt = messagebox.askyesno("Bill", "Deseja salvar conta?")
@@ -240,12 +241,9 @@ class Store:
             fh.close()
 
     def print_bill(self):
-        q = self.billarea.get(1.0, 'end-1c')
-        filename = tempfile.mktemp('.txt')
-        open(filename, 'w').write(q)
-        os.startfile(filename, "print")
-        janelas.Filme.btn_confirma(self.principalobj)
-        self.quit()
+        #self.addItem()
+        self.makeBill()
+
 
     def reset(self):
         self.billarea.delete(1.0, END)

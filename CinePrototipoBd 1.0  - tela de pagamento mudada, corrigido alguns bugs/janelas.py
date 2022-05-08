@@ -345,7 +345,7 @@ class Filme(funcDb):
         self.img2 = PhotoImage(file=r"Imagens/Filmes/pol.png")
         self.img3 = PhotoImage(file=r"Imagens/Filmes/pol3.png")
         # Frame 3
-
+        self.reserva.qtd_ticket = 0
         for i in range(0, 5):
             for j in range(0, 5):
                 # tentei separar em função essas condicionais, mas garbage collector não deixa
@@ -354,6 +354,8 @@ class Filme(funcDb):
                     imgPoltrona = self.img1
                 elif (self.dados[index-1] == 2):
                     imgPoltrona = self.img3
+                    self.reserva.qtd_ticket = self.reserva.qtd_ticket + 1
+                    #print(self.reserva.qtd_ticket)
                 else:
                     imgPoltrona = self.img2
                 self.btn_poltrona.append(Button(self.frame3, image=imgPoltrona, compound=BOTTOM, text=index,
