@@ -121,7 +121,7 @@ class Principal(funcDb):
         '''
 
         # Frame 5
-        self.logo = Label(self.frame5, text="teste5")
+        self.logo = Label(self.frame5)
         self.logo.grid()
 
         #variavel usada na tela pedidos
