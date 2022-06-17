@@ -2,6 +2,7 @@ from modulos import *
 from reserva import Reserva
 from reserva import Filminho
 from reserva import sessoes
+#import itens
 import pagamento
 import loginGui
 # Logo: 170x40
@@ -20,16 +21,18 @@ class funcDb():
 class Principal(funcDb):
     def __init__(self):
         self.window = Tk()
-        self.window.geometry('900x600')
+        self.window.geometry('1025x600')
         self.window.resizable(False, False)
         # self.window.overrideredirect(True)  # Desativa os botoes padroes da janela
         self.centraliza_janela()
 
+        #self.descricao = itens.Filme() 
+
         self.frame1 = Frame(self.window, width=175, height=600, borderwidth=0, relief="solid")  # Barra Lateral
-        self.frame2 = Frame(self.window, width=725, height=50, borderwidth=1, relief="solid")  # Nome do cinema
-        self.frame3 = Frame(self.window, width=725, height=100, borderwidth=1, relief="solid")  # Banner 1
-        self.frame4 = Frame(self.window, width=725, height=350, borderwidth=1, relief="solid")  # Filmes em cartaz
-        self.frame5 = Frame(self.window, width=725, height=100, borderwidth=1, relief="solid")  # Banner 2
+        self.frame2 = Frame(self.window, width=840, height=50, borderwidth=1, relief="solid")  # Nome do cinema
+        self.frame3 = Frame(self.window, width=840, height=100, borderwidth=1, relief="solid")  # Banner 1
+        self.frame4 = LabelFrame(self.window, width=840, height=340, borderwidth=1, relief="solid", text="Mais Vendidos", font=("Elephant", 15))  # Filmes em cartaz
+        self.frame5 = Frame(self.window, width=840, height=100, borderwidth=1, relief="solid")  # Banner 2
 
         self.frame1.pack(side=LEFT)
         self.frame2.pack()
@@ -89,7 +92,7 @@ class Principal(funcDb):
         self.logo.grid()
 
         # Frame 3
-        self.imag = PhotoImage(file=r"Imagens/Bertoldo.png")
+        self.imag = PhotoImage(file=r"Imagens/banner.png")
         self.nome_cine = Label(self.frame3, image=self.imag)
         self.nome_cine.grid()
 
@@ -97,8 +100,13 @@ class Principal(funcDb):
         self.imag4 = PhotoImage(file=r"Imagens/film2.png")
 
         self.imag4 = PhotoImage(file=r"Imagens/filme1.png")
+        
+        #novo
+        self.reserva = Reserva()
+        self.janela_poltrona = Filme.janela_poltrona
 
-        self.film1 = Button(self.frame4, pady=25, image=self.image_list[0])
+                                                                            #novo
+        self.film1 = Button(self.frame4, pady=25, image=self.image_list[0], command=lambda: Filme.janela_horarios(self, Filminho(4)))
         self.film1.grid(column=1, row=0, pady=18, padx=2)
 
         self.film2 = Button(self.frame4, pady=25, image=self.image_list[1])
@@ -110,15 +118,15 @@ class Principal(funcDb):
         self.film4 = Button(self.frame4, pady=25, image=self.image_list[3])
         self.film4.grid(column=4, row=0, pady=18, padx=2)
 
-        ''' CODIGO DO SLIDER
+        
         self.avanca = 1 
         self.volta = 0
-        self.button_forward = Button(self.frame4, text=">>", command=lambda: self.avancar())
+        self.button_forward = Button(self.frame4, text=">", command=lambda: self.avancar())
         self.button_forward.grid(column=5, row=0)
 
-        self.button_back = Button(self.frame4, text="<<", command=lambda: self.voltar())
+        self.button_back = Button(self.frame4, text="<", command=lambda: self.voltar())
         self.button_back.grid(column=0, row=0)
-        '''
+        
 
         # Frame 5
         self.logo = Label(self.frame5)
@@ -127,7 +135,7 @@ class Principal(funcDb):
         #variavel usada na tela pedidos
         self.infoPedidos = []
 
-    ''' CODIGO DO SLIDER
+    
     def avancar(self):
         global button_forward
         global button_back
@@ -173,7 +181,7 @@ class Principal(funcDb):
             self.avanca = self.avanca - 1
         else:
             self.avanca = 2
-    CODIGO DO SLIDER '''
+    
     def janela_historico(self):
         j_historico = tkinter.Toplevel()
         j_historico.geometry("900x600")
@@ -499,9 +507,9 @@ class Filme(funcDb):
 
         self.newWindow = tkinter.Toplevel()
         self.newWindow.resizable(False, False)
-        self.newWindow.geometry(f"600x450+"
+        self.newWindow.geometry(f"600x550+"
                                 f"{int((self.newWindow.winfo_screenwidth() / 2) - (600 / 2))}+"
-                                f"{int((self.newWindow.winfo_screenheight() / 2) - (450 / 2))}")
+                                f"{int((self.newWindow.winfo_screenheight() / 2) - (550 / 2))}")
         frame1 = Frame(self.newWindow)
         frame2 = Frame(self.newWindow)
         self.frame3 = Frame(self.newWindow)
@@ -546,8 +554,10 @@ class Filme(funcDb):
 
         # Frame 4
         #btn_confirma = Button(frame4, text="Avançar", font=("Arial", 20), fg="White", background="Black", command=self.btn_confirma)
-        btn_confirma = Button(frame4, text="Avançar", font=("Arial", 20), fg="White", background="Black", command=lambda:(self.verificaRN002(), self.preencheInfoReserva()))
-        btn_confirma.grid(ipadx=110)
+        btn_tela = Button(frame4, text="TELA", font=("Arial", 20), fg="White", background="Black")
+        btn_tela.grid(ipadx=110)
+        btn_confirma = Button(frame4, text="AVANÇAR", font=("Arial", 18), fg="White", background="Red", command=lambda:(self.verificaRN002(), self.preencheInfoReserva()))
+        btn_confirma.grid(ipadx=30)
         self.newWindow.grab_set()
 
     def verificaRN002(self):
