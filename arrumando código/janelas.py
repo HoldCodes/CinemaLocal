@@ -537,6 +537,7 @@ class Filme(funcDb):
         self.img3 = PhotoImage(file=r"Imagens/Filmes/pol3.png")
         # Frame 3
         self.reserva.qtd_ticket = 0
+
         for i in range(0, 5):
             for j in range(0, 5):
                 # tentei separar em função essas condicionais, mas garbage collector não deixa
@@ -548,7 +549,7 @@ class Filme(funcDb):
                     self.reserva.qtd_ticket = self.reserva.qtd_ticket + 1
                 else:
                     imgPoltrona = self.img2
-                self.btn_poltrona.append(Button(self.frame3, image=imgPoltrona, compound=BOTTOM, text=index,
+                self.btn_poltrona.append(Button(self.frame3, image=imgPoltrona, compound=BOTTOM, text=26-index,
                                                 command=lambda x=((i * 5) + j + 1): (self.escolhe_poltrona(x),self.contaQtdPoltrona(x, listaPoltrona))))
                 self.btn_poltrona[index - 1].grid(column=j, row=i)
 
